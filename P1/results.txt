@@ -1,0 +1,14 @@
+bison -d P1.y
+P1.y: warning: 8 shift/reduce conflicts [-Wconflicts-sr]
+flex P1.l
+gcc P1.tab.c lex.yy.c -lfl -o P1
+P1.y: In function ‘yyparse’:
+P1.y:487:2: warning: implicit declaration of function ‘itoa’ [-Wimplicit-function-declaration]
+  itoa($1,$$->head->val,10);//in base 10
+  ^
+/tmp/ccb8DJTh.o: In function `yyparse':
+P1.tab.c:(.text+0x193b): undefined reference to `itoa'
+P1.tab.c:(.text+0x327c): undefined reference to `itoa'
+collect2: error: ld returned 1 exit status
+Makefile:2: recipe for target 'all' failed
+make: *** [all] Error 1
